@@ -56,7 +56,6 @@ export default function Projects() {
 
   const selectFromCard = (index) => {
     setActiveIndex(index);
-    if (isMobile) setPaused(true);
   };
 
   return (
@@ -67,11 +66,7 @@ export default function Projects() {
           Six builds, one screen. GiniVibe plays live inside the device. Pick a project below.
         </p>
 
-        <div
-          className="relative mt-8"
-          onMouseEnter={isMobile ? undefined : () => setPaused(true)}
-          onMouseLeave={isMobile ? undefined : () => setPaused(false)}
-        >
+        <div className="relative mt-8">
           <div className="flex items-center justify-center gap-3 md:gap-6">
             <div className="hidden shrink-0 md:block">
               <ArrowButton dir="left" label="Previous project" onClick={() => goTo(activeIndex - 1)} />
@@ -120,10 +115,6 @@ export default function Projects() {
               <button
                 key={p.id}
                 onClick={() => selectFromCard(i)}
-                onMouseEnter={isMobile ? undefined : () => { setPaused(true); setActiveIndex(i); }}
-                onMouseLeave={isMobile ? undefined : () => setPaused(false)}
-                onFocus={() => { setPaused(true); setActiveIndex(i); }}
-                onBlur={() => setPaused(false)}
                 className={selected ? "neu-inset p-5 text-left" : "neu-raised-sm p-5 text-left"}
                 style={{ borderRadius: 18, order: selected ? -1 : 0 }}
               >
