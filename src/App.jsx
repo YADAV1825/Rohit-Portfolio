@@ -1,5 +1,6 @@
 import Navbar from "./components/Navbar";
 import Hero from "./sections/Hero";
+import Experience from "./sections/Experience";
 import Projects from "./sections/Projects";
 import Skills from "./sections/Skills";
 import About from "./sections/About";
@@ -16,6 +17,7 @@ const App = () => {
       <Navbar theme={theme} onToggle={toggle} />
       <main>
         <Hero />
+        <Experience />
         <Projects />
         <Skills />
         <About />

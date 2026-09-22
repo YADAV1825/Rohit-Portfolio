@@ -2,6 +2,7 @@ import { useState } from "react";
 import ThemeToggle from "./ThemeToggle";
 
 const LINKS = [
+  { label: "Experience", href: "#experience" },
   { label: "Work", href: "#work" },
   { label: "Skills", href: "#skills" },
   { label: "About", href: "#about" },
