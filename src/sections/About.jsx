@@ -1,73 +1,27 @@
-import { useRef } from "react";
-import AnimatedHeaderSection from "../components/AnimatedHeaderSection";
-import { AnimatedTextLines } from "../components/AnimatedTextLines";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-
-const About = () => {
-  const text = `I don't just code features , I build the systems that run them. 
-  From virtual CPUs to compilers, 
-  I’m obsessed with the "how" behind every abstraction.`;
-
-
-  const aboutText = `I'm a pre-final year IT undergrad at NIT Jalandhar who loves building systems from scratch , from compilers and virtual machines to large-scale AI models.
-
-I’ve built 25+ LLMs (120M–1.4B params), training them on 500B+ tokens using TPU clusters. I work across the full stack architectures, tokenization, and distributed training , with a focus on efficiency and scalability.
-
-Beyond AI, I enjoy low-level systems and performance-driven engineering, along with building full-stack applications when needed.
-
-Currently focused on:
-      - LLM Internals & Scaling
-      - Distributed Systems
-      - AI Infrastructure
-      - Low-Level Systems
-
-      
-Always building, always learning.`;
-  const imgRef = useRef(null);
-  useGSAP(() => {
-    gsap.to("#about", {
-      scale: 0.95,
-      scrollTrigger: {
-        trigger: "#about",
-        start: "bottom 80%",
-        end: "bottom 20%",
-        scrub: true,
-        markers: false,
-      },
-      ease: "power1.inOut",
-    });
-
-    gsap.set(imgRef.current, {
-      clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0% 100%)",
-    });
-    gsap.to(imgRef.current, {
-      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-      duration: 2,
-      ease: "power4.out",
-      scrollTrigger: { trigger: imgRef.current },
-    });
-  });
+export default function About() {
   return (
-    <section id="about" className="min-h-screen bg-black rounded-b-4xl">
-      <AnimatedHeaderSection
-        subTitle={"Code with purpose, Built to scale"}
-        title={"About"}
-        text={text}
-        textColor={"text-white"}
-        withScrollTrigger={true}
-      />
-      <div className="flex flex-col items-center justify-between gap-22 px-10 pb-16 text-xl font-light tracking-wide lg:flex-row md:text-2xl lg:text-3xl text-white/60">
-        <img
-          ref={imgRef}
-          src="images/rohit2.jpeg"
-          alt="man"
-          className="w-150 max-w-[280px] max-h-[300px] object-cover md:max-w-[500px] md:max-h-none lg:max-w-[650px] rounded-4xl"
-        />
-        <AnimatedTextLines text={aboutText} className={"w-full"} />
+    <section id="about" className="mx-auto max-w-7xl px-4 pt-14">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="neu-raised p-6 md:p-10">
+          <h2 className="text-3xl font-black tracking-tight md:text-4xl">About</h2>
+          <p className="mt-4 leading-relaxed">
+            Pre-final year IT undergrad at NIT Jalandhar. I like the layer below the framework:
+            tokenizers, kernels, schedulers, memory.
+          </p>
+          <p className="neu-muted mt-3 leading-relaxed">
+            Built 25+ LLMs on TPU clusters, a 32-bit OS, a compiler toolchain and clinical AI
+            models. Currently focused on LLM internals, distributed systems and AI infrastructure.
+          </p>
+        </div>
+        <div className="neu-inset flex flex-col justify-center p-6 md:p-10">
+          <p className="text-sm font-semibold uppercase tracking-widest opacity-60">Now focused on</p>
+          <ul className="mt-3 space-y-2 text-base font-medium">
+            {["LLM internals and scaling", "Distributed training", "AI infrastructure", "Low-level systems"].map((x) => (
+              <li key={x} className="neu-raised-sm px-4 py-3">{x}</li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );
-};
-
-export default About;
+}

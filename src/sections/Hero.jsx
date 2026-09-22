@@ -1,143 +1,64 @@
-import { Canvas } from "@react-three/fiber";
-import { Planet } from "../components/Planet";
-import { Environment, Float, Lightformer } from "@react-three/drei";
-import { useMediaQuery } from "react-responsive";
-import AnimatedHeaderSection from "../components/AnimatedHeaderSection";
+import { RESUME_URL, socials } from "../data/portfolio";
+import { useIsMobile } from "../hooks/useTheme";
 
-const Hero = () => {
-  const isMobile = useMediaQuery({ maxWidth: 853 });
+export default function Hero() {
+  const isMobile = useIsMobile();
 
-  const text = `IT student @ NIT Jalandhar |
-Built 25+ LLMs from scratch (500B+ tokens), along with compilers and virtual machines from the ground up.`;
   return (
-    <section id="home" className="flex flex-col justify-end min-h-screen relative">
-      {/* ── AutonomousX Floating Banner ── */}
-      {/* Mobile: compact pill */}
-      <a
-        href="https://huggingface.co/autonomousX"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed top-4 left-4 z-40 flex md:hidden items-center gap-2 px-3 py-2 rounded-full no-underline shadow-lg active:scale-95 transition-transform duration-200"
-        style={{
-          textDecoration: "none",
-          background: "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)",
-          border: "1px solid rgba(255,255,255,0.1)",
-        }}
+    <section id="top" className="mx-auto max-w-7xl px-4 pt-24 md:pt-28">
+      <div
+        className={`grid gap-6 ${isMobile ? "grid-cols-1" : "grid-cols-5"}`}
       >
-        <span className="text-base">🤗</span>
-        <span className="text-white font-bold text-[10px] uppercase tracking-wider whitespace-nowrap">
-          AutonomousX
-        </span>
-        <span className="text-white/50 text-[9px]">→</span>
-      </a>
-
-      {/* Desktop: full marquee banner */}
-      <a
-        href="https://huggingface.co/autonomousX"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed top-6 left-6 z-40 group hidden md:flex items-center gap-0 no-underline"
-        style={{ textDecoration: "none" }}
-      >
-        {/* Static label pill */}
-        <div
-          className="flex items-center gap-2 px-4 py-2.5 rounded-l-full border border-r-0 border-black/15 shadow-lg
-            transition-all duration-300 group-hover:shadow-xl group-hover:scale-[1.02]"
-          style={{
-            background: "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)",
-          }}
-        >
-          <span className="text-lg">🤗</span>
-          <span className="text-white font-bold text-xs uppercase tracking-wider whitespace-nowrap">
-            AutonomousX
-          </span>
-        </div>
-
-        {/* Scrolling marquee strip */}
-        <div
-          className="relative overflow-hidden rounded-r-full border border-l-0 border-black/15 shadow-lg
-            transition-all duration-300 group-hover:shadow-xl group-hover:scale-[1.02]"
-          style={{
-            width: "280px",
-            background: "linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%)",
-          }}
-        >
-          <div
-            className="flex whitespace-nowrap py-2.5"
-            style={{
-              animation: "marqueeScroll 12s linear infinite",
-            }}
-          >
-            <span className="text-white/80 text-xs font-medium tracking-wide px-4">
-              ✦ See all the 25+ LLMs I built from scratch on AutonomousX ✦ 500B+ tokens trained ✦ Open-source models ✦
-            </span>
-            <span className="text-white/80 text-xs font-medium tracking-wide px-4">
-              ✦ See all the 25+ LLMs I built from scratch on AutonomousX ✦ 500B+ tokens trained ✦ Open-source models ✦
-            </span>
+        <div className="neu-raised col-span-5 flex flex-col justify-center p-8 md:col-span-3 md:p-12">
+          <p className="neu-pill inline-flex w-fit items-center px-4 py-1.5 text-xs font-semibold uppercase tracking-widest">
+            Systems + AI builder
+          </p>
+          <h1 className="mt-5 text-4xl font-black leading-none tracking-tight md:text-6xl">
+            Rohit Yadav
+          </h1>
+          <p className="neu-muted mt-4 max-w-[52ch] text-base leading-relaxed md:text-lg">
+            IT undergrad at NIT Jalandhar. I build compilers, virtual machines and LLMs from scratch.
+          </p>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <a href="#work" className="neu-btn neu-btn-primary px-6 py-3 text-sm font-semibold">
+              View work
+            </a>
+            <a href={RESUME_URL} target="_blank" rel="noopener noreferrer" className="neu-btn px-6 py-3 text-sm font-semibold">
+              Resume
+            </a>
+          </div>
+          <div className="mt-7 flex flex-wrap gap-2">
+            {socials.slice(0, 5).map((s) => (
+              <a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer" className="neu-pill px-3 py-1.5 text-xs font-medium">
+                {s.name}
+              </a>
+            ))}
           </div>
         </div>
-      </a>
 
-      {/* Marquee keyframes */}
-      <style>{`
-        @keyframes marqueeScroll {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-      `}</style>
-
-      <AnimatedHeaderSection
-        title={"Rohit Yadav"}
-        text={text}
-        textColor={"text-black"}
-      />
-
-      {!isMobile && (
-        <figure
-          className="absolute inset-0 -z-50"
-          style={{ width: "100vw", height: "100vh" }}
-        >
-          <Canvas
-            shadows
-            camera={{ position: [0, 0, -10], fov: 17.5, near: 1, far: 20 }}
-          >
-            <ambientLight intensity={0.5} />
-            <Float speed={0.5}>
-              <Planet scale={1} />
-            </Float>
-            <Environment resolution={256}>
-              <group rotation={[-Math.PI / 3, 4, 1]}>
-                <Lightformer
-                  form={"circle"}
-                  intensity={2}
-                  position={[0, 5, -9]}
-                  scale={10}
-                />
-                <Lightformer
-                  form={"circle"}
-                  intensity={2}
-                  position={[0, 3, 1]}
-                  scale={10}
-                />
-                <Lightformer
-                  form={"circle"}
-                  intensity={2}
-                  position={[-5, -1, -1]}
-                  scale={10}
-                />
-                <Lightformer
-                  form={"circle"}
-                  intensity={2}
-                  position={[10, 1, 0]}
-                  scale={16}
-                />
-              </group>
-            </Environment>
-          </Canvas>
-        </figure>
-      )}
+        <div className={`flex flex-col gap-6 ${isMobile ? "col-span-1" : "col-span-2"}`}>
+          <div className="neu-raised overflow-hidden p-3">
+            <img
+              src="/images/rohit2.jpeg"
+              alt="Portrait of Rohit Yadav"
+              className="h-64 w-full rounded-2xl object-cover md:h-72"
+              loading="eager"
+            />
+          </div>
+          <div className="neu-inset grid grid-cols-3 gap-2 p-4 text-center">
+            {[
+              ["25+", "LLMs built"],
+              ["500B+", "tokens trained"],
+              ["400+", "DSA solved"],
+            ].map(([n, l]) => (
+              <div key={l} className="p-2">
+                <p className="text-xl font-black md:text-2xl">{n}</p>
+                <p className="neu-muted text-xs">{l}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </section>
   );
-};
-
-export default Hero;
+}
