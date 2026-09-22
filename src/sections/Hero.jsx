@@ -17,7 +17,7 @@ export default function Hero() {
             Rohit Yadav
           </h1>
           <p className="neu-muted mt-4 max-w-[52ch] text-base leading-relaxed md:text-lg">
-            IT undergrad at NIT Jalandhar. I build compilers, virtual machines and LLMs from scratch.
+            IT undergrad at NIT Jalandhar building LLMs, AI systems, compilers and infrastructure from scratch.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <a href="#work" className="neu-btn neu-btn-primary px-6 py-3 text-sm font-semibold">
